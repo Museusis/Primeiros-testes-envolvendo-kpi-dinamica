@@ -38,54 +38,54 @@ function alertar(resposta, idRegistro) {
         muito_frio: 10
     };
 
-    var classe_temperatura = 'cor-alerta';
+    var classe_temperatura = 'cardCor cardCor span textCard ';
 
     if (temp >= limites.muito_quente) {
-        classe_temperatura = 'cor-alerta perigo-quente';
+        classe_temperatura = 'cardCor cardCor span textCard perigo-quente';
         grauDeAviso = 'perigo quente'
-        grauDeAvisoCor = 'cor-alerta perigo-quente'
+        grauDeAvisoCor = 'cardCor cardCor span textCard perigo-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
-        classe_temperatura = 'cor-alerta alerta-quente';
+        classe_temperatura = 'cardCor cardCor span textCard alerta-quente';
         grauDeAviso = 'alerta quente'
-        grauDeAvisoCor = 'cor-alerta alerta-quente'
+        grauDeAvisoCor = 'cardCor cardCor span textCard alerta-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.quente && temp > limites.frio) {
-        classe_temperatura = 'cor-alerta ideal';
+        classe_temperatura = 'cardCor cardCor span textCard ideal';
         removerAlerta(idRegistro);
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
-        classe_temperatura = 'cor-alerta alerta-frio';
+        classe_temperatura = 'cardCor cardCor span textCard alerta-frio';
         grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
+        grauDeAvisoCor = 'cardCor cardCor span textCard alerta-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp <= limites.muito_frio) {
-        classe_temperatura = 'cor-alerta perigo-frio';
+        classe_temperatura = 'cardCor cardCor span textCard perigo-frio';
         grauDeAviso = 'perigo frio'
-        grauDeAvisoCor = 'cor-alerta perigo-frio'
+        grauDeAvisoCor = 'cardCor cardCor span textCard perigo-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
 
-    var card;
+    var cardCor;
 
     if (idRegistro == 1) {
         tempQuadro1.innerHTML = temp + "°C";
-        card = card_1
+        cardCor = cardCor1
     } else if (idRegistro == 2) {
-        temp_aquario_2.innerHTML = temp + "°C";
-        card = card_2
+        tempQuadro2.innerHTML = temp + "°C";
+        cardCor = cardCor2
     } else if (idRegistro == 3) {
-        temp_aquario_3.innerHTML = temp + "°C";
-        card = card_3
+        tempQuadro3.innerHTML = temp + "°C";
+        cardCor = cardCor3
     } else if (idRegistro == 4) {
-        temp_aquario_4.innerHTML = temp + "°C";
-        card = card_4
+        tempQuadro4.innerHTML = temp + "°C";
+        cardCor = cardCor4
     }
 
-    card.className = classe_temperatura;
+    cardCor.className = classe_temperatura;
 }
 
 function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor) {
