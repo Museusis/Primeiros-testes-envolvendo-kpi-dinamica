@@ -99,12 +99,12 @@ p {
 }
 
 
-h3 {
+/* h3 {
   text-align: end;
   font-size: 20px;
   text-decoration: underline;
   color: red;
-}
+} */ /*Depois você especifica isso aqui */
 
 .btn {
   width: 40%;
@@ -765,7 +765,7 @@ li {
   font-size: 45px;
   line-height: 80px;
   color: white;
-  text-shadow: black 2px 2px;
+  text-shadow: black 1px 1px;
 }
 
 .textCard {
@@ -836,15 +836,31 @@ temperatura,
   z-index: 9;
 }
 
+.alertaCor{
+  width: 100%;
+  height: 10px;
+  border: white solid 2px;
+}
+
+.h3Alerta{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.smallAlerta{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .mensagem-alarme {
   background-color: white;
   border-radius: 5px;
   width: 300px;
-  height: 80px;
+  height:fit-content; /*80px */
   margin: 10px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  border:2px rgb(134, 16, 134) outset;
+  /* border-image: linear-gradient( yellow, rgb(206, 18, 206)) ; */
 }
 
 .mensagem-alarme h3 {
@@ -859,17 +875,16 @@ temperatura,
 .alarme-sino {
   width: 48px;
   height: 48px;
-  animation-name: bell;
-  animation-duration: 4s;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
+  animation-name: sinalizacao;
+  animation-duration: 3s;
+  background-image: url('../img/sino.png');
   background-size: cover;
   animation-iteration-count: infinite;
 }
 
-@keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
+@keyframes sinalizacao{
+  0% {transform: scale(0.4);}
+  25% {transform: rotate(10deg);}
+  75% {transform: scale(1.3);}
+  100% {transform: scale(1);}
 }

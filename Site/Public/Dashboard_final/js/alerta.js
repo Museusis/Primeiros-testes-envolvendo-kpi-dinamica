@@ -1,4 +1,5 @@
 var alertas = [];
+var alertas2 = [];
 
 function obterdados(idRegistro) {
     fetch(`/medidas/tempo-real/${idRegistro}`)
@@ -154,14 +155,15 @@ function alertar2(resposta, idRegistro) {
 
     cardCor.className = classe_umidade;
 
+
 }
-function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor) {
+function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor ) {
     var indice = alertas.findIndex(item => item.idRegistro == idRegistro);
 
     if (indice >= 0) {
-        alertas[indice] = { idRegistro, temp, grauDeAviso, grauDeAvisoCor }
+        alertas[indice] = { grauDeAviso, temp, idRegistro, grauDeAvisoCor}
     } else {
-        alertas.push({ idRegistro, temp, grauDeAviso, grauDeAvisoCor });
+        alertas.push({grauDeAviso, temp, idRegistro, grauDeAvisoCor });
     }
 
     exibirCards();
@@ -170,25 +172,9 @@ function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor) {
 // que pode ser inserido clicando com o seu teclado em alt+255 ou pelo código adicionado acima.
 }
 
-function exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor) {
-    var indice = alertas.findIndex(item => item.idRegistro == idRegistro);
-    
-        if(indice >= 0){
-            alertas[indice] = { idRegistro, umid, grauDeAviso2, grauDeAviso2Cor}
-        }else{
-            alertas.push({idRegistro, umid, grauDeAviso2, grauDeAviso2Cor});
-        }
-
-        exibirCards2();
-}
 function removerAlerta(idRegistro) {
     alertas = alertas.filter(item => item.idRegistro != idRegistro);
     exibirCards();
-}
- 
-function removerAlerta2(idRegistro){
-    alertas = alertas.filter(item => item.idRegistro != idRegistro);
-    exibirCards2();
 }
 
 function exibirCards() {
@@ -200,33 +186,13 @@ function exibirCards() {
     }
 }
 
-function exibirCards2() {
-    alerta2.innerHTML = '';
-
-    for (var f = 0; f < alertas.length; f++) {
-        var mensagem2 = alertas[f];
-        alerta2.innerHTML += transformarEmDiv2(mensagem2);
-    }
-}
-
-function transformarEmDiv({ idRegistro, temp, grauDeAviso, grauDeAvisoCor }) {
+function transformarEmDiv({ grauDeAviso, temp, idRegistro, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
-    <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Sala ${idRegistro} está em estado de ${grauDeAviso}!</h3>
-    <small>Temperatura ${temp}.</small>   
+    <div class="${grauDeAvisoCor} alertaCor">&#12644;</div> 
+     <h3 class="h3Alerta">Sala ${idRegistro} está em estado de ${grauDeAviso}!</h3>
+    <small class="smallAlerta">Temperatura | Umidade ${temp}.</small> 
     </div>
     <div class="alarme-sino"></div>
     </div>`;
 }
-
-function transformarEmDiv2({ idRegistro, umid, grauDeAviso2, grauDeAviso2Cor }) {
-    return `<div class="mensagem-alarme">
-        <div class="informacao">
-        <div class="${grauDeAviso2Cor}">&#12644;</div> 
-         <h3>Sala ${idRegistro} está em estado de ${grauDeAviso2}!</h3>
-        <small>Umidade ${umid}.</small>   
-        </div>
-        <div class="alarme-sino"></div>
-        </div>`;
-    }
