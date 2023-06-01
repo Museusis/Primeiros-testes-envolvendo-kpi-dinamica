@@ -35,7 +35,7 @@ function alertar(resposta, idRegistro) {
         muito_quente: 24,
         quente: 20,
         ideal: 16,
-        frio: 12,
+        frio: 14,
         muito_frio: 10
     };
 
@@ -99,9 +99,9 @@ function alertar2(resposta, idRegistro) {
 
     var limites2 = {
         muito_umido: 61,
-        umido: 59,
+        umido: 57,
         ideal: 50,
-        seco: 46,
+        seco: 48,
         muito_seco: 44
     };
 
@@ -120,7 +120,7 @@ function alertar2(resposta, idRegistro) {
         exibirAlerta(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
     }
     else if (umid < limites2.umido && umid > limites2.seco) {
-        classe_umidade = 'cardCor cardCor span ideal';
+        classe_umidade = 'cardCor cardCor span ideal2';
         removerAlerta(idRegistro);
     }
     else if (umid <= limites2.seco && umid > limites2.muito_seco) {
@@ -140,16 +140,16 @@ function alertar2(resposta, idRegistro) {
 
     if (idRegistro == 1) {
         umidQuadro1.innerHTML = umid + "%";
-        cardCor = cardCor1
+        cardCor = cardCor5
     } else if (idRegistro == 2) {
         umidQuadro2.innerHTML = umid + "%";
-        cardCor = cardCor2
+        cardCor = cardCor6
     } else if (idRegistro == 3) {
         umidQuadro3.innerHTML = umid + "%";
-        cardCor = cardCor3
+        cardCor = cardCor7
     } else if (idRegistro == 4) {
         umidQuadro4.innerHTML = umid + "%";
-        cardCor = cardCor4
+        cardCor = cardCor8
     }
 
     cardCor.className = classe_umidade;
@@ -170,11 +170,27 @@ function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor) {
 // que pode ser inserido clicando com o seu teclado em alt+255 ou pelo código adicionado acima.
 }
 
+function exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor) {
+    var indice = alertas.findIndex(item => item.idRegistro == idRegistro);
+    
+        if(indice >= 0){
+            alertas[indice] = { idRegistro, umid, grauDeAviso2, grauDeAviso2Cor}
+        }else{
+            alertas.push({idRegistro, umid, grauDeAviso2, grauDeAviso2Cor});
+        }
+
+        exibirCards2();
+}
 function removerAlerta(idRegistro) {
     alertas = alertas.filter(item => item.idRegistro != idRegistro);
     exibirCards();
 }
  
+function removerAlerta2(idRegistro){
+    alertas = alertas.filter(item => item.idRegistro != idRegistro);
+    exibirCards2();
+}
+
 function exibirCards() {
     alerta.innerHTML = '';
 
@@ -184,13 +200,33 @@ function exibirCards() {
     }
 }
 
+function exibirCards2() {
+    alerta2.innerHTML = '';
+
+    for (var f = 0; f < alertas.length; f++) {
+        var mensagem2 = alertas[f];
+        alerta2.innerHTML += transformarEmDiv2(mensagem2);
+    }
+}
+
 function transformarEmDiv({ idRegistro, temp, grauDeAviso, grauDeAvisoCor }) {
     return `<div class="mensagem-alarme">
     <div class="informacao">
     <div class="${grauDeAvisoCor}">&#12644;</div> 
-     <h3>Aquário ${idRegistro} está em estado de ${grauDeAviso}!</h3>
+     <h3>Sala ${idRegistro} está em estado de ${grauDeAviso}!</h3>
     <small>Temperatura ${temp}.</small>   
     </div>
     <div class="alarme-sino"></div>
     </div>`;
 }
+
+function transformarEmDiv2({ idRegistro, umid, grauDeAviso2, grauDeAviso2Cor }) {
+    return `<div class="mensagem-alarme">
+        <div class="informacao">
+        <div class="${grauDeAviso2Cor}">&#12644;</div> 
+         <h3>Sala ${idRegistro} está em estado de ${grauDeAviso2}!</h3>
+        <small>Umidade ${umid}.</small>   
+        </div>
+        <div class="alarme-sino"></div>
+        </div>`;
+    }

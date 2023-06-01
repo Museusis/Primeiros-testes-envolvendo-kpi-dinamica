@@ -421,6 +421,66 @@ li {
   justify-content: center;
 }
 
+.caixaMetricaMuitoSeco h4{
+  margin-top: 10px;
+  margin-left: 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaMuitoSeco ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.caixaMetricaSeco h4{
+  margin-top: 10px;
+  margin-left: 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaSeco ul li{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.caixaMetricaIdealUmid h4{
+  margin-top: 10px;
+  margin-left: 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaIdealUmid ul li{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.caixaMetricaUmido h4{
+  margin-top: 10px;
+  margin-left: 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaUmido ul li{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.caixaMetricaMuitoUmido h4{
+  margin-top: 10px;
+  margin-left: 70px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaMuitoUmido ul li{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .caixaMetricaGreen h4 {
   margin-top: 10px;
   margin-left: 70px;
@@ -442,12 +502,31 @@ li {
   font-size: 18px;
 }
 
+.caixaMetricaRedFrio h4 {
+  margin-top: 10px;
+  margin-left: 60px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
 .caixaMetricaRed ul li {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.caixaMetricaRedFrio ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .caixaMetricaYellow h4 {
+  margin-top: 10px;
+  margin-left: 60px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.caixaMetricaYellowFrio h4 {
   margin-top: 10px;
   margin-left: 60px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -459,11 +538,32 @@ li {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.caixaMetricaYellowFrio ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .caixaMetricaRed {
   margin-left: 20px;
   height: 150px;
   width: 180px;
   background-color: #FF4929;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
+}
+
+.caixaMetricaRedFrio {
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #d65230;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
 }
 
 .caixaMetricaGreen {
@@ -471,14 +571,94 @@ li {
   height: 150px;
   width: 180px;
   background-color: #83F46B;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
 }
 
 .caixaMetricaYellow {
   margin-left: 20px;
   height: 150px;
   width: 180px;
-  background-color: #FFDE59;
+  background-color: #ffee58;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
 }
+
+.caixaMetricaYellowFrio {
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color:#f09e24;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+}
+
+.caixaMetricaMuitoUmido{
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #002657af;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
+}
+
+.caixaMetricaUmido{
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #4169E1;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
+}
+
+.caixaMetricaIdealUmid{
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #007FFF;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+
+}
+
+.caixaMetricaSeco{
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #87c8e0;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+}
+
+.caixaMetricaMuitoSeco{
+  margin-left: 20px;
+  height: 150px;
+  width: 180px;
+  background-color: #789db8;
+  color:#ffffff;
+  font-weight: bold;
+  text-shadow: black 1px 1px;
+  box-shadow: rgb(151, 148, 148) 4px 4px 10px;
+}
+
 
 .box_q {
   width: 45%;
@@ -584,6 +764,8 @@ li {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 45px;
   line-height: 80px;
+  color: white;
+  text-shadow: black 2px 2px;
 }
 
 .textCard {
@@ -608,15 +790,15 @@ temperatura,
 }
 
 .perigo-frio {
-  background-color: #5c6bc0;
+  background-color:#d65230 /* #a32e2e;*/
 }
 
 .perigo-quente {
-  background-color: #ff7043;
+  background-color: #FF4929;
 }
 
 .alerta-frio {
-  background-color: #42a5f5;
+  background-color: #f09e24;
 }
 
 .alerta-quente {
@@ -624,7 +806,27 @@ temperatura,
 }
 
 .ideal {
-  background-color: #9ccc65;
+  background-color: #83F46B;
+}
+
+.perigo-umido{
+  background-color: #002657af;
+}
+.perigo-seco{
+  background-color: #789db8;
+  text-shadow: black;
+}
+
+.alerta-umido{
+  background-color: #4169E1;
+}
+
+.alerta-seco{
+  background-color: #87c8e0;
+}
+
+.ideal2{
+  background-color: #007FFF;
 }
 
 /* Alerta */
