@@ -10,6 +10,7 @@ function obterdados(idRegistro) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                     alertar(resposta, idRegistro);
+                    alertar2(resposta, idRegistro);
                 });
             } else {
 
@@ -38,34 +39,34 @@ function alertar(resposta, idRegistro) {
         muito_frio: 10
     };
 
-    var classe_temperatura = 'cardCor cardCor span textCard ';
+    var classe_temperatura = 'cardCor cardCor span ';
 
     if (temp >= limites.muito_quente) {
-        classe_temperatura = 'cardCor cardCor span textCard perigo-quente';
+        classe_temperatura = 'cardCor cardCor span perigo-quente';
         grauDeAviso = 'perigo quente'
-        grauDeAvisoCor = 'cardCor cardCor span textCard perigo-quente'
+        grauDeAvisoCor = 'cardCor cardCor span perigo-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
-        classe_temperatura = 'cardCor cardCor span textCard alerta-quente';
+        classe_temperatura = 'cardCor cardCor span alerta-quente';
         grauDeAviso = 'alerta quente'
-        grauDeAvisoCor = 'cardCor cardCor span textCard alerta-quente'
+        grauDeAvisoCor = 'cardCor cardCor span alerta-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp < limites.quente && temp > limites.frio) {
-        classe_temperatura = 'cardCor cardCor span textCard ideal';
+        classe_temperatura = 'cardCor cardCor span ideal';
         removerAlerta(idRegistro);
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
-        classe_temperatura = 'cardCor cardCor span textCard alerta-frio';
+        classe_temperatura = 'cardCor cardCor span alerta-frio';
         grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cardCor cardCor span textCard alerta-frio'
+        grauDeAvisoCor = 'cardCor cardCor span alerta-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
     else if (temp <= limites.muito_frio) {
-        classe_temperatura = 'cardCor cardCor span textCard perigo-frio';
+        classe_temperatura = 'cardCor cardCor span perigo-frio';
         grauDeAviso = 'perigo frio'
-        grauDeAvisoCor = 'cardCor cardCor span textCard perigo-frio'
+        grauDeAvisoCor = 'cardCor cardCor span perigo-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
     }
 
@@ -88,6 +89,72 @@ function alertar(resposta, idRegistro) {
     cardCor.className = classe_temperatura;
 }
 
+function alertar2(resposta, idRegistro) {
+    var umid = resposta[0].umidade;
+
+    console.log(idRegistro === resposta[0].fkSensor)
+    
+    var grauDeAviso2 ='';
+
+
+    var limites2 = {
+        muito_umido: 61,
+        umido: 59,
+        ideal: 50,
+        seco: 46,
+        muito_seco: 44
+    };
+
+    var classe_umidade = 'cardCor cardCor span ';
+
+    if (umid >= limites2.muito_umido) {
+        classe_umidade = 'cardCor cardCor span perigo-umido';
+        grauDeAviso2 = 'perigo umido'
+        grauDeAviso2Cor = 'cardCor cardCor span perigo-umido'
+        exibirAlerta(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+    }
+    else if (umid < limites2.muito_umido && umid >= limites2.umido) {
+        classe_umidade = 'cardCor cardCor span alerta-umido';
+        grauDeAviso2 = 'alerta umido'
+        grauDeAviso2Cor = 'cardCor cardCor span alerta-umido'
+        exibirAlerta(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+    }
+    else if (umid < limites2.umido && umid > limites2.seco) {
+        classe_umidade = 'cardCor cardCor span ideal';
+        removerAlerta(idRegistro);
+    }
+    else if (umid <= limites2.seco && umid > limites2.muito_seco) {
+        classe_umidade = 'cardCor cardCor span alerta-seco';
+        grauDeAviso2 = 'alerta seco'
+        grauDeAviso2Cor = 'cardCor cardCor span alerta-seco'
+        exibirAlerta(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+    }
+    else if (umid <= limites2.muito_seco) {
+        classe_umidade = 'cardCor cardCor span perigo-seco';
+        grauDeAviso2 = 'perigo seco'
+        grauDeAviso2Cor = 'cardCor cardCor span perigo-seco'
+        exibirAlerta(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+    }
+
+    var cardCor;
+
+    if (idRegistro == 1) {
+        umidQuadro1.innerHTML = umid + "%";
+        cardCor = cardCor1
+    } else if (idRegistro == 2) {
+        umidQuadro2.innerHTML = umid + "%";
+        cardCor = cardCor2
+    } else if (idRegistro == 3) {
+        umidQuadro3.innerHTML = umid + "%";
+        cardCor = cardCor3
+    } else if (idRegistro == 4) {
+        umidQuadro4.innerHTML = umid + "%";
+        cardCor = cardCor4
+    }
+
+    cardCor.className = classe_umidade;
+
+}
 function exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor) {
     var indice = alertas.findIndex(item => item.idRegistro == idRegistro);
 
