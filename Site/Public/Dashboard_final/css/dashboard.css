@@ -835,11 +835,17 @@ temperatura,
   right: 0px;
   z-index: 9;
 }
+#alerta2 {
+  position: absolute;
+  top: 84%;
+  right: 0px;
+  z-index: 9;
+}
 
 .alertaCor{
   width: 100%;
   height: 10px;
-  border: white solid 2px;
+  border: purple solid 2px;
 }
 
 .h3Alerta{
@@ -851,7 +857,7 @@ temperatura,
 }
 
 .mensagem-alarme {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.63);
   border-radius: 5px;
   width: 300px;
   height:fit-content; /*80px */

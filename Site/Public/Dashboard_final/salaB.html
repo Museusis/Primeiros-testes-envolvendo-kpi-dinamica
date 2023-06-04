@@ -11,7 +11,7 @@
 
 
 </head>
-<body>
+<body onload="atualizacaoPeriodica()">
   <style>
    span {
     width: 80%;
@@ -93,9 +93,7 @@
 
 let proximaAtualizacao;
 
-  window.onload = obterDadosGraficos();
-
-  function obterDadosGraficos() {
+  function atualizacaoPeriodica() {
     obterDadosGrafico(1)
     obterDadosGrafico(2)
     obterDadosGrafico(3)
@@ -113,7 +111,7 @@ let proximaAtualizacao;
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function obterDadosGrafico() {
+  function obterDadosGrafico(idRegistro) {
 
 if (proximaAtualizacao != undefined) {
   clearTimeout(proximaAtualizacao);
@@ -189,8 +187,8 @@ const config = {
 };
 
 // Adicionando gráfico criado em div na tela
-let myChart1 = new Chart(
-  document.getElementById(`myChart1${idRegistro}`),
+let myChart = new Chart(
+  document.getElementById(`myChart${idRegistro}`),
   config
 );
 
@@ -203,4 +201,59 @@ console.log(resposta)
 setTimeout(() => atualizarGrafico(idRegistro, dados, myChart1), 1000);
 }
 
+function atualizarGrafico(idRegistro, dados, myChart1) {
+
+
+
+fetch(`/medidas/tempo-real/${idRegistro}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+            obterdados(idRegistro);
+            // alertar(novoRegistro, idRegistro);
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
+
+            let avisoCaptura = document.getElementById(`avisoCaptura${idRegistro}`)
+            avisoCaptura.innerHTML = ""
+
+
+            if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                console.log("---------------------------------------------------------------")
+                console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                console.log("Horário do novo dado capturado:")
+                console.log(novoRegistro[0].momento_grafico)
+                console.log("Horário do último dado capturado:")
+                console.log(dados.labels[dados.labels.length - 1])
+                console.log("---------------------------------------------------------------")
+            } else {
+                // tirando e colocando valores no gráfico
+                dados.labels.shift(); // apagar o primeiro
+                dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+
+                dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                myChart1.update();
+            }
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(idRegistro, dados, myChart1), 2000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(idRegistro, dados, myChart1), 2000);
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
 </script>

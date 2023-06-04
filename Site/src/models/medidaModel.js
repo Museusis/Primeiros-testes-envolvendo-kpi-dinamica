@@ -61,8 +61,63 @@ function buscarMedidasEmTempoReal(idRegistro) {
     return database.executar(instrucaoSql);
 }
 
+function buscarMedidasTemperatura(idRegistro){
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select 
+         temperatura,
+                        fkSensor 
+                        from registro where fkSensor= ${idRegistro} 
+                    order by idRegistro desc limit 1`;
+}else {
+    console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    return
+}
+
+console.log("Executando a instrução SQL: \n" + instrucaoSql);
+return database.executar(instrucaoSql);
+}
+
+function buscarMedidasUmidade(idRegistro){
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select 
+         umidade,
+                        fkSensor 
+                        from registro where fkSensor= ${idRegistro} 
+                    order by idRegistro desc limit 1`;
+}else {
+    console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    return
+}
+
+console.log("Executando a instrução SQL: \n" + instrucaoSql);
+return database.executar(instrucaoSql);
+}
+
+function buscarStatusSensor(idSensor){
+    instrucaoSql = ''
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select 
+         status
+                    from sensor where idSensor = ${idSensor} 
+                    order by idSensor`;
+}else {
+    console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    return
+}
+
+console.log("Executando a instrução SQL: \n" + instrucaoSql);
+return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarStatusSensor,
+    buscarMedidasTemperatura,
+    buscarMedidasUmidade
 }

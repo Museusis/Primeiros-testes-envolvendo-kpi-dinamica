@@ -13,9 +13,11 @@
 
         <script src="../js/funcoes.js"></script>
     <script src="./js/alerta.js"></script>
+    <script src="js/alertaUmidade.js"></script>
+    <script src="js/statusSensor.js"></script>
 
 </head>
-<body onload="validarSessao(), atualizacaoPeriodica()">
+<body onload="validarSessao(), atualizacaoPeriodica(), plotarPizza2()">
       <!-- Começo do Header -->
   <div class="header">
     <div class="container">
@@ -38,7 +40,8 @@
 <div class="banner">
     <div id="alerta">
     </div>
-
+<div id="alerta2">
+</div>
     <div class="text">
         <h2>Bem vindo(a) <span id="b_usuario">usuário</span> ao Painel Principal de Monitoramento</h2>
         <span>Acompanhe as Médias de Temperatura e Umidade <span id="mensal"> mensal</span> no seu Museu. 
@@ -66,8 +69,9 @@
 
 <div class="caixa_sensor">
     <h2>Quantidade de sensores que você possui atualmente</h2>
-    <span>115</span>
+    <span id="totalSensor"></span>
 </div>
+
 
 <div class="graficoPizza">
     <div class="pizza">
@@ -75,6 +79,7 @@
             <canvas id="grafico_pizza2"></canvas>
         </div>              
     </div>
+    
 
     <!-- </div>
     <div class="baixo">
@@ -217,7 +222,10 @@
 
 <script>
 
-b_usuario.innerHTML = sessionStorage.NOME_USUARIO
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+totalSensor.innerHTML = sessionStorage.STATTOTALSENSOR;
+
 
     const pizza = document.getElementById('grafico_pizza2');
   const bar1 = document.getElementById('myChart1');
@@ -225,7 +233,12 @@ b_usuario.innerHTML = sessionStorage.NOME_USUARIO
   const bar3 = document.getElementById('myChart3');
   const bar4 = document.getElementById('myChart4');
 
-new Chart(pizza, {
+  function plotarPizza2(){
+    ativo = sessionStorage.STATSENSORATIVO
+    inativo = sessionStorage.STATSENSORINATIVO
+    manutencao = sessionStorage.STATSENSORMANUTENCAO
+
+    new Chart(pizza, {
   type: 'pie',
   data: {
     labels: [
@@ -235,7 +248,7 @@ new Chart(pizza, {
   ],
   datasets: [{
     label: 'Sensores',
-    data: [300, 50, 100],
+    data: [ativo, inativo, manutencao], // 300, 50, 100
     //   borderWidth: 1,
       backgroundColor: [
       'rgb(128, 0, 128)',
@@ -244,8 +257,13 @@ new Chart(pizza, {
     ],    hoverOffset: 4
     }]
   },
+  options: {
+        maintainAspectRatio: false,
+      }
 }
 );
+  }
+
 
 function atualizacaoPeriodica() {
         obterdados(1);
@@ -253,6 +271,18 @@ function atualizacaoPeriodica() {
         obterdados(3);
         obterdados(4);
 
-        setTimeout(atualizacaoPeriodica, 5000);
+        obterdados2(1);
+        obterdados2(2);
+        obterdados2(3);
+        obterdados2(4);
+
+        setTimeout(atualizacaoPeriodica, 10000);
+    }    
+    
+    function StatusSensor(){
+        buscarStatusSensor(1);
+        buscarStatusSensor(2);
+        buscarStatusSensor(3);
+        buscarStatusSensor(4);
     }
 </script>
