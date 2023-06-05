@@ -2,12 +2,13 @@
 var Ativo = 0;
 var Inativo = 0;
 var Manutencao = 0;
+var TotalSensor = 0;
 
-var TotalSensor =0;
+var contagemRealizada = false;
 
 function buscarStatusSensor(idSensor) {
     // aguardar();
-
+var contagemRealizada = false;
     fetch(`/medidas/statusSensor/${idSensor}`
     ).then(function (resposta) {
 
@@ -18,8 +19,10 @@ function buscarStatusSensor(idSensor) {
           console.log(json);
           console.log(JSON.stringify(json));
 
-       
-            if (json[0].status =='Ativo'){
+            if (contagemRealizada){
+              return
+            }else{
+              if (json[0].status =='Ativo'){
                 Ativo++;
                 TotalSensor++;
                 sessionStorage.STATSENSORATIVO = Ativo;
@@ -32,7 +35,8 @@ function buscarStatusSensor(idSensor) {
                 TotalSensor++
                 sessionStorage.STATSENSORMANUTENCAO = Manutencao;
             }
-
+          }
+    
             sessionStorage.STATTOTALSENSOR = TotalSensor;
         });
 
@@ -52,3 +56,5 @@ function buscarStatusSensor(idSensor) {
 
     return false;
   }
+
+  contagemRealizada = true;
