@@ -101,7 +101,7 @@ function buscarStatusSensor(idQuadrante){
     instrucaoSql = ''
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
-         status
+         statusSensor
                     from quadrante where idQuadrante = ${idQuadrante} 
                     order by idQuadrante`;
 }else {

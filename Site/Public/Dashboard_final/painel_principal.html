@@ -242,18 +242,19 @@ mediaIdeal = (100 * TotalIdeal) /TotalAlertas;
   type: 'pie',
   data: {
     labels: [
-    'Ativo',
+    'inativo',
     'Em manutenção',
-    'Inativo'
+    'ativo'
   ],
   datasets: [{
     label: 'Sensores',
     data: [ativo, inativo, manutencao], // 300, 50, 100
     //   borderWidth: 1,
       backgroundColor: [
-      'rgb(128, 0, 128)',
+      'rgb(160,160,160)',
       'rgb(186, 85, 211)',
-      'rgb(160,160,160)'
+      'rgb(128, 0, 128)'
+
     ],    hoverOffset: 4
     }]
   },

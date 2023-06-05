@@ -50,10 +50,10 @@ constraint foreign key (fkSala) references sala(idSala)
 );
 
 insert into quadrante values
-(null, 'revolução francesa', 'Ativo', 1),
-(null, 'egito', 'Manutenção', 2),
-(null, 'obras famosas', 'Inativo', 3),
-(null, 'medieval', 'Ativo', 2);
+(null, 'revolução francesa', 1),
+(null, 'egito', 2),
+(null, 'obras famosas', 3),
+(null, 'medieval', 2);
 
 
 
@@ -81,3 +81,27 @@ select * from registro;
 
 update registro set temperatura = 24
 	where idRegistro = 2;
+    
+    select 
+        temperatura, 
+       umidade,
+       fkQuadrante,
+                       dtHora,
+                       DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
+                   from registro
+                   where fkQuadrante = 2
+                   order by idRegistro desc limit 7;
+                   
+                   
+                   select 
+         status
+                    from quadrante where idQuadrante = 1
+                    order by idQuadrante;
+				
+                alter table quadrante add column statusSensor varchar(45);
+                alter table quadrante add constraint statusSensor check  (statusSensor in('ativo','inativo','manutencao'));
+                insert into quadrante (statusSensor) values
+                ('ativo'),
+                ('inativo'),
+                ('manutencao');
+                update quadrante set statusSensor = 'ativo' where idQuadrante = 4;
