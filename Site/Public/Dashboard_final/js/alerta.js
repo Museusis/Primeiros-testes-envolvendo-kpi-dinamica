@@ -1,5 +1,10 @@
 var alertas = [];
 
+    
+var CriticoTemp= 0;
+var AlertaTemp=0;
+var IdealTemp=0
+
 function obterdados(idRegistro) {
     fetch(`/medidas/tempe/${idRegistro}`)
         .then(resposta => {
@@ -46,28 +51,33 @@ function alertar(resposta, idRegistro) {
         grauDeAviso = 'perigo quente'
         grauDeAvisoCor = 'cardCor cardCor span perigo-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
+        CriticoTemp++
     }
     else if (temp < limites.muito_quente && temp >= limites.quente) {
         classe_temperatura = 'cardCor cardCor span alerta-quente';
         grauDeAviso = 'alerta quente'
         grauDeAvisoCor = 'cardCor cardCor span alerta-quente'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
+        AlertaTemp++
     }
     else if (temp < limites.quente && temp > limites.frio) {
         classe_temperatura = 'cardCor cardCor span ideal';
         removerAlerta(idRegistro);
+        IdealTemp++
     }
     else if (temp <= limites.frio && temp > limites.muito_frio) {
         classe_temperatura = 'cardCor cardCor span alerta-frio';
         grauDeAviso = 'alerta frio'
         grauDeAvisoCor = 'cardCor cardCor span alerta-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
+        AlertaTemp++
     }
     else if (temp <= limites.muito_frio) {
         classe_temperatura = 'cardCor cardCor span perigo-frio';
         grauDeAviso = 'perigo frio'
         grauDeAvisoCor = 'cardCor cardCor span perigo-frio'
         exibirAlerta(temp, idRegistro, grauDeAviso, grauDeAvisoCor)
+        CriticoTemp++
     }
 
     var cardCor;
@@ -87,6 +97,13 @@ function alertar(resposta, idRegistro) {
     }
 
     cardCor.className = classe_temperatura;
+
+    sessionStorage.TOTALCRITICOTEMP= CriticoTemp;
+    sessionStorage.TOTALPERIGOTEMP = AlertaTemp;
+    sessionStorage.TOTALIDEALTEMP = IdealTemp
+    
+    var totalAlertaTemp= CriticoTemp + AlertaTemp; + IdealTemp;
+    sessionStorage.TOTALTEMP = totalAlertaTemp;
 }
 
 

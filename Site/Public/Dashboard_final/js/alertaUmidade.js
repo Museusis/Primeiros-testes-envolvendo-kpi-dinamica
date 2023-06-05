@@ -1,5 +1,9 @@
 var alertas2 = [];
 
+var CriticoUmid= 0;
+var AlertaUmid=0;
+var IdealUmid=0
+
 function obterdados2(idRegistro) {
     fetch(`/medidas/umid/${idRegistro}`)
         .then(resposta => {
@@ -46,28 +50,33 @@ function alertar2(resposta, idRegistro) {
         grauDeAviso2 = 'perigo umido'
         grauDeAviso2Cor = 'cardCor cardCor span perigo-umido'
         exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+        CriticoUmid++
     }
     else if (umid < limites2.muito_umido && umid >= limites2.umido) {
         classe_umidade = 'cardCor cardCor span alerta-umido';
         grauDeAviso2 = 'alerta umido'
         grauDeAviso2Cor = 'cardCor cardCor span alerta-umido'
         exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+        AlertaUmid++
     }
     else if (umid < limites2.umido && umid > limites2.seco) {
         classe_umidade = 'cardCor cardCor span ideal2';
         removerAlerta2(idRegistro);
+        IdealUmid++
     }
     else if (umid <= limites2.seco && umid > limites2.muito_seco) {
         classe_umidade = 'cardCor cardCor span alerta-seco';
         grauDeAviso2 = 'alerta seco'
         grauDeAviso2Cor = 'cardCor cardCor span alerta-seco'
         exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+        AlertaUmid++
     }
     else if (umid <= limites2.muito_seco) {
         classe_umidade = 'cardCor cardCor span perigo-seco';
         grauDeAviso2 = 'perigo seco'
         grauDeAviso2Cor = 'cardCor cardCor span perigo-seco'
         exibirAlerta2(umid, idRegistro, grauDeAviso2, grauDeAviso2Cor)
+        CriticoUmid++
     }
 
     var cardCor;
@@ -87,6 +96,13 @@ function alertar2(resposta, idRegistro) {
     }
 
     cardCor.className = classe_umidade;
+
+sessionStorage.TOTALCRITICOUMID = CriticoUmid ;
+sessionStorage.TOTALPERIGOUMID = AlertaUmid;
+sessionStorage.TOTALIDEALUMID = IdealUmid;
+
+var totalAlertaUmid= CriticoUmid  + AlertaUmid + IdealUmid;
+sessionStorage.TOTALUMID = totalAlertaUmid;
 
 }
 

@@ -41,12 +41,13 @@ insert into sala values
 (null, '1', 'B', 1),
 (null, '1', 'C', 1);
 
-
 create table if not exists quadrante(
 idQuadrante int primary key auto_increment,
 nome varchar(50),
+status varchar(11),
 fkSala int,
-constraint foreign key (fkSala) references sala(idSala)
+constraint foreign key (fkSala) references sala(idSala),
+constraint chkStatus check (status IN ('Ativo', 'Inativo', 'Manutenção'))
 );
 
 insert into quadrante values
@@ -54,8 +55,6 @@ insert into quadrante values
 (null, 'egito', 'Manutenção', 2),
 (null, 'obras famosas', 'Inativo', 3),
 (null, 'medieval', 'Ativo', 2);
-
-
 
 create table if not exists registro(
 idRegistro int auto_increment,
@@ -81,3 +80,7 @@ select * from registro;
 
 update registro set temperatura = 24
 	where idRegistro = 2;
+
+
+    
+

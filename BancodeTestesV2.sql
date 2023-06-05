@@ -1,5 +1,7 @@
 Create Database sprint3;
 
+
+
 use sprint3;
 
 create table empresa(
@@ -38,8 +40,10 @@ constraint foreign key (fkEmp_S) references empresa(idEmpresa)
 create table sensor(
 idSensor int primary key auto_increment,
 nome varchar(50),
+status varchar(11), 
 fkSala int,
-constraint foreign key (fkSala) references sala(idSala)
+constraint foreign key (fkSala) references sala(idSala),
+constraint chkStatus check (status IN ('Ativo', 'Inativo', 'Manutenção'))
 );
 
 create table registro(
@@ -67,12 +71,12 @@ insert into sala values
 (null, '2', 'salinhaYoko', '1');
 
 insert into sensor values
-(null,'dht11_3','1');
+(null,'dht11_3', 'Ativo','1');
 
 insert into sensor values
-(null,'dht11_4','2'),
-(null, 'dht11_3a','1'),
-(null, 'dht11_5', '3');
+(null,'dht11_4','Inativo','2'),
+(null, 'dht11_3a','Manutenção','1'),
+(null, 'dht11_5', 'Ativo', '3');
 
 insert into registro values
 (null,18,49,default,1);
@@ -94,11 +98,28 @@ select*from sala join empresa on fkEmp_S=idEmpresa;
 select*from sala join sensor on fkSala=idSala;
 select*from sensor;
 select*from sensor join registro on fkSensor=idSensor;
-select*from sensor;
+select*from sensor;	
 select*from usuario
 join  empresa as matriz on fkEmp_U=idEmpresa
 join empresa as filial on matriz.idEmpresa=filial.fkEmpresaMatriz
 join sala on fkEmp_S=matriz.idEmpresa
 join sensor on fkSala=idSala
 join registro on fkSensor=idSensor; 
+
+
 select * from registro;
+
+select status from sensor;
+
+update registro set umidade = 48
+	where idRegistro = 4;
+    
+update registro set temperatura = 20
+	where idRegistro = 2;
+
+update registro set temperatura = 24
+	where idRegistro = 3;
+    
+
+    
+    

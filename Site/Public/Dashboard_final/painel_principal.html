@@ -51,17 +51,18 @@
         <div class="leituras">
             <div class="l1">
                 <span id="title">Média de alertas críticos</span id="title">
-                <span>3%</span>
+                <span id="mediaCritic">3%</span>
             </div>
             <div class="l2">
                 <span id="title">Média de leituras estáveis </span id="title">
-                <span>85%</span>
+                <span id="mediaEstavel">85%</span>
             </div>
             <div class="l3">
                 <span id="title">Média de alertas de risco</span id="title">
-                <span>20%</span>
+                <span id="mediaRisc">20%</span>
             </div>
         </div>
+    
 <div class="caixa_alerta">
     <h2>A taxa de alertas próximos a ultrapassar a temperatura ou umidade ideal da <span id="salaB" onclick="verSala()">Sala B</span> esteve acima do esperado este mês. 
         Procure dar atenção especial para determinada sala. </h2>
@@ -79,28 +80,85 @@
             <canvas id="grafico_pizza2"></canvas>
         </div>              
     </div>
-    
-
-    <!-- </div>
-    <div class="baixo">
-    <div class="graficos">
-    <div>
-        <canvas id="myChart1"></canvas>
-    </div>
-    <div>
-        <canvas id="myChart2"></canvas>
-    </div>
-    <div>
-        <canvas id="myChart3"></canvas>
-    </div>
-    <div>
-        <canvas id="myChart4"></canvas> -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
 </div>
+
+    
+        <!-- Analytics -->
+        <div class="metricas">
+            <div  class="caixaMetricaRedFrio">
+                <h4>Crítico</h4>
+                <ul>
+                    <li>10º C</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaYellowFrio">
+                <h4>Alerta</h4>
+                <ul>
+                    <li>12º - 14ºC</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaGreen">
+                <h4>Ideal</h4>
+                <ul>
+                    <li>16º - 18ºC</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaYellow">
+                <h4>Alerta</h4>
+                <ul>
+                    <li>20º - 22ºC</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaRed">
+                <h4>Crítico</h4>
+                <ul>
+                    <li>24º C</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="metricas">
+            <div  class="caixaMetricaMuitoSeco">
+                <h4>Crítico</h4>
+                <ul>
+                    <li>44%</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaSeco">
+                <h4>Alerta</h4>
+                <ul>
+                    <li>46% - 48%</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaIdealUmid">
+                <h4>Ideal</h4>
+                <ul>
+                    <li>50% - 55%</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaUmido">
+                <h4>Alerta</h4>
+                <ul>
+                    <li>57% - 59%</li>
+                </ul>
+            </div>
+    
+            <div class="caixaMetricaMuitoUmido">
+                <h4>Crítico</h4>
+                <ul>
+                    <li>61%</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Analytics -->
+
     <!-- fim do gráfico -->
     <div class="textPreCard">
     <span>Acompanhe em tempo Real as medidas que estão fora do ideal</span>
@@ -141,79 +199,7 @@
 </div>
     <!-- fim do card -->
 
-    <div class="metricas">
-        <div  class="caixaMetricaRedFrio">
-            <h4>Crítico</h4>
-            <ul>
-                <li>10º C</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaYellowFrio">
-            <h4>Alerta</h4>
-            <ul>
-                <li>12º - 14ºC</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaGreen">
-            <h4>Ideal</h4>
-            <ul>
-                <li>16º - 18ºC</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaYellow">
-            <h4>Alerta</h4>
-            <ul>
-                <li>20º - 22ºC</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaRed">
-            <h4>Crítico</h4>
-            <ul>
-                <li>24º C</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="metricas">
-        <div  class="caixaMetricaMuitoSeco">
-            <h4>Crítico</h4>
-            <ul>
-                <li>44%</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaSeco">
-            <h4>Alerta</h4>
-            <ul>
-                <li>46% - 48%</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaIdealUmid">
-            <h4>Ideal</h4>
-            <ul>
-                <li>50% - 55%</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaUmido">
-            <h4>Alerta</h4>
-            <ul>
-                <li>57% - 59%</li>
-            </ul>
-        </div>
-
-        <div class="caixaMetricaMuitoUmido">
-            <h4>Crítico</h4>
-            <ul>
-                <li>61%</li>
-            </ul>
-        </div>
-    </div>
+   
 
   
 
@@ -225,6 +211,20 @@
 b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
 totalSensor.innerHTML = sessionStorage.STATTOTALSENSOR;
+
+
+TotalAlertas = Number(sessionStorage.TOTALTEMP)  + Number(sessionStorage.TOTALUMID);
+TotalCritico = Number(sessionStorage.TOTALCRITICOTEMP) + Number(sessionStorage.TOTALCRITICOUMID);
+TotalPerigo = Number(sessionStorage.TOTALPERIGOTEMP) + Number(sessionStorage.TOTALPERIGOUMID);
+TotalIdeal = Number(sessionStorage.TOTALIDEALTEMP) + Number(sessionStorage.TOTALIDEALUMID);
+
+mediaCritico = (100 * TotalCritico) / TotalAlertas;
+mediaRisco = (100 * TotalPerigo) / TotalAlertas;
+mediaIdeal = (100 * TotalIdeal) /TotalAlertas;
+
+    mediaCritic.innerHTML= `${mediaCritico.toFixed(2)}%`
+    mediaRisc.innerHTML=`${mediaRisco.toFixed(2)}%` 
+    mediaEstavel.innerHTML=`${mediaIdeal.toFixed(2)}%` 
 
 
     const pizza = document.getElementById('grafico_pizza2');
@@ -258,7 +258,7 @@ totalSensor.innerHTML = sessionStorage.STATTOTALSENSOR;
     }]
   },
   options: {
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
       }
 }
 );

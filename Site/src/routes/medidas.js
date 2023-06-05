@@ -19,7 +19,7 @@ router.get("/umid/:idRegistro", function (req, res){
     medidaController.buscarMedidasUmidade(req, res);
 });
 
-router.get("/statusSensor/:idSensor", function (req, res){
+router.get("/statusSensor/:idQuadrante", function (req, res){
     medidaController.buscarStatusSensor(req, res);
 })
 

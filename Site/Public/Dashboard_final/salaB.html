@@ -69,15 +69,6 @@
           <div>
             <canvas id="myChart1"></canvas>
           </div>
-          <!-- <div>
-            <canvas id="myChart2"></canvas>
-          </div>
-          <div>
-            <canvas id="myChart3"></canvas>
-          </div>
-          <div>
-            <canvas id="myChart4"></canvas>
-          </div> -->
         </div>
       </div>
     </div>
@@ -205,7 +196,7 @@
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (novoRegistro) {
-            obterdados(idRegistro)
+            obterDadosGrafico(idRegistro)
             // alertar(novoRegistro, idRegistro);
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`)
             console.log(`Dados atuais do gráfico:`)

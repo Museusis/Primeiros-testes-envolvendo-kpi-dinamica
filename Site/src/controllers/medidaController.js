@@ -78,11 +78,11 @@ function buscarMedidasUmidade(req, res){
 }
 
 function  buscarStatusSensor(req, res){
-    var idSensor = req.params.idSensor;
+    var idQuadrante = req.params.idQuadrante;
 
     console.log(`Recuperando o status do sensor`);
 
-    medidaModel.buscarStatusSensor(idSensor).then(function(resultado){
+    medidaModel.buscarStatusSensor(idQuadrante).then(function(resultado){
         if(resultado.length >0){
             res.status(200).json(resultado);
         }else {

@@ -20,7 +20,7 @@ function buscarUltimasMedidas(idRegistro, limite_linhas) {
                         dtHora,
                         DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico
                     from registro
-                    where fkSensor = ${idRegistro}
+                    where fkQuadrante = ${idRegistro}
                     order by idRegistro desc limit ${limite_linhas}`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -40,8 +40,8 @@ function buscarMedidasEmTempoReal(idRegistro) {
         temperatura, 
         umidade,  
                         CONVERT(varchar, dtHora, 108) as momento_grafico, 
-                        fkSensor
-                        from registro where fkSensor = ${idRegistro} 
+                        fkQuadrante
+                        from registro where fkQuadrante = ${idRegistro} 
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -49,8 +49,8 @@ function buscarMedidasEmTempoReal(idRegistro) {
          temperatura, 
          umidade,
                         DATE_FORMAT(dtHora,'%H:%i:%s') as momento_grafico, 
-                        fkSensor 
-                        from registro where fkSensor= ${idRegistro} 
+                        fkQuadrante 
+                        from registro where fkQuadrante= ${idRegistro} 
                     order by idRegistro desc limit 1`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -67,8 +67,8 @@ function buscarMedidasTemperatura(idRegistro){
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
          temperatura,
-                        fkSensor 
-                        from registro where fkSensor= ${idRegistro} 
+                        fkQuadrante 
+                        from registro where fkQuadrante= ${idRegistro} 
                     order by idRegistro desc limit 1`;
 }else {
     console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -85,8 +85,8 @@ function buscarMedidasUmidade(idRegistro){
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
          umidade,
-                        fkSensor 
-                        from registro where fkSensor= ${idRegistro} 
+                        fkQuadrante 
+                        from registro where fkQuadrante= ${idRegistro} 
                     order by idRegistro desc limit 1`;
 }else {
     console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -97,13 +97,13 @@ console.log("Executando a instrução SQL: \n" + instrucaoSql);
 return database.executar(instrucaoSql);
 }
 
-function buscarStatusSensor(idSensor){
+function buscarStatusSensor(idQuadrante){
     instrucaoSql = ''
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
          status
-                    from sensor where idSensor = ${idSensor} 
-                    order by idSensor`;
+                    from quadrante where idQuadrante = ${idQuadrante} 
+                    order by idQuadrante`;
 }else {
     console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
     return

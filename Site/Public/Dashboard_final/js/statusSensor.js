@@ -6,10 +6,10 @@ var TotalSensor = 0;
 
 var contagemRealizada = false;
 
-function buscarStatusSensor(idSensor) {
+function buscarStatusSensor(idQuadrante) {
     // aguardar();
 var contagemRealizada = false;
-    fetch(`/medidas/statusSensor/${idSensor}`
+    fetch(`/medidas/statusSensor/${idQuadrante}`
     ).then(function (resposta) {
 
       if (resposta.ok) {
